@@ -13,6 +13,7 @@ import android.os.Message;
 import android.util.Log;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Locale;
 
@@ -26,13 +27,14 @@ public class GeoLocation {
             public void run() {
                 Geocoder geocoder = new Geocoder(context, Locale.getDefault());
                 String result = null;
+                DecimalFormat df = new DecimalFormat("#.#####");
                 try {
                     List<Address> addressList = geocoder.getFromLocationName(locationAddress, 1);
                     if (addressList != null && addressList.size() > 0) {
                         Address address = addressList.get(0);
                         StringBuilder sb = new StringBuilder();
-                        sb.append(address.getLatitude()).append("\n");
-                        sb.append(address.getLongitude()).append("\n");
+                        sb.append(df.format(address.getLatitude())).append("\n");
+                        sb.append(df.format(address.getLongitude())).append("\n");
                         result = sb.toString();
                     }
                 } catch (IOException e) {

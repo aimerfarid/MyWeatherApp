@@ -62,8 +62,6 @@ public class WeatherFunction {
 
 
 
-
-
     public static class placeIdTask extends AsyncTask<String, Void, JSONObject> {
 
         public AsyncResponse delegate = null;//Call back interface
@@ -116,9 +114,6 @@ public class WeatherFunction {
 
         }
     }
-
-
-
 
 
 

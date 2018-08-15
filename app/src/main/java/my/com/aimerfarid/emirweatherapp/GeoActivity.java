@@ -15,8 +15,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class GeoActivity extends AppCompatActivity {
-    public static final String EXTRA_TEXT = "my.com.aimerfarid.emirweatherapp.EXTRA_TEXT";
-
+    public static final String EXTRA_LAT = "my.com.aimerfarid.emirweatherapp.EXTRA_LAT";
+    public static final String EXTRA_LNG = "my.com.aimerfarid.emirweatherapp.EXTRA_LNG";
+    private String locationAddress;
 
     Button addressButton;
     TextView addressTV;
@@ -57,10 +58,10 @@ public class GeoActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private class GeoHandler extends Handler {
+    public class GeoHandler extends Handler {
         @Override
         public void handleMessage(Message message) {
-            String locationAddress;
+            //String locationAddress;
             switch (message.what) {
                 case 1:
                     Bundle bundle = message.getData();
@@ -69,7 +70,19 @@ public class GeoActivity extends AppCompatActivity {
                 default:
                     locationAddress = null;
             }
+//            String lng = locationAddress.substring(locationAddress.lastIndexOf(" ") + 2);
+//            int i = lng.indexOf("\n",1);
+//            String word = lng.substring(1, i);
+            //String rest = lng.substring(i);
+            //latLongTV.setText(lng.substring(i));
             latLongTV.setText(locationAddress);
         }
+    }
+
+    public void passLongLat(String latW, String lngW) {
+        String coord = locationAddress.substring(locationAddress.lastIndexOf(" ")+2);
+        int i = coord.indexOf("\n",1);
+        latW = coord.substring(1, i);
+        lngW = coord.substring(i);
     }
 }

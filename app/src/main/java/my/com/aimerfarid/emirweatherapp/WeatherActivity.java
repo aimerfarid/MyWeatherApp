@@ -16,14 +16,16 @@ public class WeatherActivity extends AppCompatActivity {
 
     Typeface weatherFont;
 
-    public String lat;
-    public String lng;
+    //public String latW ="";
+    //public String lngW = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //getSupportActionBar().hide();
         setContentView(R.layout.activity_weather);
+
+        GeoActivity geoActivity = new GeoActivity();
 
         weatherFont = Typeface.createFromAsset(getApplicationContext().getAssets(), "fonts/weathericons-regular-webfont.ttf");
 
@@ -50,8 +52,10 @@ public class WeatherActivity extends AppCompatActivity {
 
             }
         });
-        lat = "51.5074";
-        lng = "0.1278";
-        asyncTask.execute("51.5074", "0.1278"); //  asyncTask.execute("Latitude", "Longitude")
+
+        //geoActivity.passLongLat(latW, lngW);
+        String lat = "51.5074";
+        String lng = "0.1278";
+        asyncTask.execute(lat, lng); //  asyncTask.execute("Latitude", "Longitude")
     }
 }
