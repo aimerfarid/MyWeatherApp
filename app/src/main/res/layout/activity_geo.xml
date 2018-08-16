@@ -54,6 +54,7 @@
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/addressET"
         android:layout_marginEnd="57dp"
-        android:text="Weather Here!" />
+        android:text="Weather Here!"
+        android:onClick="passData"/>
 
 </RelativeLayout>

@@ -44,13 +44,26 @@ public class GeoActivity extends AppCompatActivity {
             }
         });
 
-        Button button = (Button) findViewById(R.id.weatherButton);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openWeatherActivity();
-            }
-        });
+//        Button button = (Button) findViewById(R.id.weatherButton);
+//        button.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                openWeatherActivity();
+//            }
+//        });
+    }
+
+    public void passData(View v) {
+        String coord = locationAddress.substring(locationAddress.lastIndexOf(" ")+2);
+        int i = coord.indexOf("\n",1);
+        String latW = coord.substring(1, i);
+        String lngW = coord.substring((i+1), coord.length()-1);
+
+        Intent passdata_intent = new Intent(this, WeatherActivity.class);
+
+        passdata_intent.putExtra("latdata", latW);
+        passdata_intent.putExtra("lngdata", lngW);
+
+        startActivity(passdata_intent);
     }
 
     public void openWeatherActivity() {
@@ -70,19 +83,33 @@ public class GeoActivity extends AppCompatActivity {
                 default:
                     locationAddress = null;
             }
-//            String lng = locationAddress.substring(locationAddress.lastIndexOf(" ") + 2);
-//            int i = lng.indexOf("\n",1);
-//            String word = lng.substring(1, i);
-            //String rest = lng.substring(i);
-            //latLongTV.setText(lng.substring(i));
+            String lng = locationAddress.substring(locationAddress.lastIndexOf(" ") + 2);
+            int i = lng.indexOf("\n",1);
+            String word = lng.substring(1, i);
+            String rest = lng.substring((i + 1), lng.length()-1);
+//            latLongTV.setText(rest);
             latLongTV.setText(locationAddress);
         }
+    }
+
+    public String passLat() {
+        String coord = locationAddress.substring(locationAddress.lastIndexOf(" ")+2);
+        int i = coord.indexOf("\n",1);
+        String lat = coord.substring(1, i);
+        return lat;
+    }
+
+    public String passLong() {
+        String coord = locationAddress.substring(locationAddress.lastIndexOf(" ")+2);
+        int i = coord.indexOf("\n",1);
+        String lng = coord.substring((i+1), coord.length()-1);
+        return lng;
     }
 
     public void passLongLat(String latW, String lngW) {
         String coord = locationAddress.substring(locationAddress.lastIndexOf(" ")+2);
         int i = coord.indexOf("\n",1);
         latW = coord.substring(1, i);
-        lngW = coord.substring(i);
+        lngW = coord.substring((i+1), coord.length()-1);
     }
 }
